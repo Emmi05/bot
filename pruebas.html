@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+</head>
+<body>
+  <div style="height: 60%; width: 40%; margin-top:5%; margin-left:10%" id="webchat" role="main"></div>
+  <script>
+     
+     // Set  the CSS rules.
+     const styleSet = window.WebChat.createStyleSet({
+         bubbleBackground: 'rgba(0, 0, 255, .1)',
+         bubbleFromUserBackground: 'rgba(0, 255, 0, .1)',
+         rootHeight: '100%',
+         rootWidth: '50%',
+         backgroundColor: 'paleturquoise'
+      });
+
+      // After generated, you can modify the CSS rules.
+      // Change font family and weight. 
+      styleSet.textContent = {
+         ...styleSet.textContent,
+         fontFamily: "'Comic Sans MS', 'Arial', sans-serif",
+         fontWeight: 'bold'
+      };
+    window.WebChat.renderWebChat({
+      directLine: window.WebChat.createDirectLine({
+          token: '<Your Direct Line token>'
+        }),
+      styleSet
+    }, document.getElementById('webchat'));
+    
+  </script>
+</body>
