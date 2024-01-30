@@ -426,53 +426,73 @@
     <!-- End Script -->
  
         <span class="u-text-highlight"> <a href="#" class="floating-button" onclick="toggleChat()">✉️</a></span>
-        <p class="texto" onclick="toggleChat()"><strong>Necesitas información?</strong> <img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/12.1.1/72x72/1f44b.png" alt="👋" class="emoji">  </p>
+        <p class="texto" onclick="toggleChat()">Necesitas información? <img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/12.1.1/72x72/1f44b.png" alt="👋" class="emoji">  </p>
  
     
     <!-- Contenedor del chat (inicialmente oculto) -->
     <div id="chatContainer">
       
         <button id="minimizeButton" onclick="minimizarChat()"><i class="fa-solid fa-down-left-and-up-right-to-center"></i></button>
-        <iframe src='https://webchat.botframework.com/embed/ejemploLanguage-bot?s=8adDNeDQGkA.E-UrhjtIGmLnIFxziPvpXRzPUuVtL-FvIEgG2FngYAM'  style='min-width: 400px; width: 100%; min-height: 500px; background-color: aquamarine;' ></iframe>
+        <iframe src='https://webchat.botframework.com/embed/ejemploLanguage-bot?s=8adDNeDQGkA.E-UrhjtIGmLnIFxziPvpXRzPUuVtL-FvIEgG2FngYAM'  style='min-width: 400px; width: 100%; min-height: 500px;'id="webchat" role="main" ></iframe>
+       
     </div>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
     <script>
         function toggleChat() {
-            var chatContainer = document.getElementById('chatContainer');
+            var webchat = document.getElementById('webchat');
     
-            if (chatContainer.style.display === '' || chatContainer.style.display === 'none') {
+            if (webchat.style.display === '' || webchat.style.display === 'none') {
                 // Si el chat está cerrado o no se ha mostrado, ábrelo
-                chatContainer.style.display = 'block';
+                webchat.style.display = 'block';
             } else {
                 // Si el chat está abierto, ciérralo
-                chatContainer.style.display = 'none';
+                webchat.style.display = 'none';
             }
         }
     
         function minimizarChat() {
-            var chatContainer = document.getElementById('chatContainer');
-            chatContainer.style.display = 'none';
+            var webchat = document.getElementById('webchat');
+            webchat.style.display = 'none';
         }
     
 
 
-const styleSet = window.chatContainer.createStyleSet({
-    bubbleBackground: 'rgba(0, 0, 255, .1)',
-    bubbleFromUserBackground: 'rgba(0, 255, 0, .1)',
-    rootHeight: '100%',
-    rootWidth: '50%',
-    backgroundColor: 'paleturquoise'
- });
-
- // After generated, you can modify the CSS rules.
- // Change font family and weight. 
- styleSet.textContent = {
-    ...styleSet.textContent,
-    fontFamily: "'Comic Sans MS', 'Arial', sans-serif",
-    fontWeight: 'bold'
- };
+// AQUI VAN LOS OTROS ESTILOS
+     
+     // Set  the CSS rules.
+     const styleSet = window.WebChat.createStyleSet({
+         bubbleBackground: 'rgba(0, 0, 255, .1)',
+         bubbleFromUserBackground: 'rgba(0, 255, 0, .1)',
+         rootHeight: '100%',
+         rootWidth: '50%',
+         backgroundColor: 'paleturquoise'
+      });
+ 
+      // After generated, you can modify the CSS rules.
+      // Change font family and weight. 
+      styleSet.textContent = {
+         ...styleSet.textContent,
+         fontFamily: "'Comic Sans MS', 'Arial', sans-serif",
+         fontWeight: 'bold'
+      };
+ 
+    // Set the avatar options. 
+     const avatarOptions = {
+         botAvatarInitials: 'BF',
+         userAvatarInitials: 'WC'
+         };
+ 
+    window.WebChat.renderWebChat({
+      directLine: window.WebChat.createDirectLine({
+          token: '8adDNeDQGkA.E-UrhjtIGmLnIFxziPvpXRzPUuVtL-FvIEgG2FngYAM'}),
+      styleSet,
+      styleOptions: avatarOptions
+    }, document.getElementById('webchat'));
+    
+ 
 </script>
+
 </body>
 
 </html>
